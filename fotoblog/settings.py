@@ -130,3 +130,6 @@ AUTH_USER_MODEL = 'authentication.User'
 
 #redirect page for guest users
 LOGIN_URL = 'login-page'
+
+#set redirect page for authenticated user
+LOGIN_REDIRECT_URL = 'home-page'
