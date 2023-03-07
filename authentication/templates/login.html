@@ -9,16 +9,13 @@
     <div>
         {{ message }}
     </div>
-    {% if user.is_authenticated %}
-       <p>
-        welcome {{ request.user }}
-       </p>
-    {% else %}
+
     <form action="" method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Login">
     </form>
-    {% endif %}
+
+    <p>Don't have an account : <a href="{% url 'signup-page' %}">Sign Up</a></p>
 
 {% endblock %}

@@ -1,8 +1,11 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from authentication.forms import loginForm
+from authentication.forms import loginForm, signupForm
+
 from django.shortcuts import redirect
 from django.views.generic import  View
+
+from django.conf import settings
 
 # Create your views here.
 
@@ -78,3 +81,32 @@ def login_page(request):
 def logout_user(request):
     logout(request)
     return redirect('login-page')
+
+
+#signup view  with CBVs
+class signup_page(View):
+    class_form = signupForm
+    template_form = 'signup.html'
+
+    def get(self, request):
+        form = self.class_form()
+        
+        return render(
+            request,
+            self.template_form,
+            context={'form': form,}
+        )
+
+    def post(self, request):
+        form =  self.class_form(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            return redirect(settings.LOGIN_URL)
+
+        return render(
+            request,
+            self.template_form,
+            context={'form': form}
+            )    

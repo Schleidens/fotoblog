@@ -23,10 +23,17 @@ import blog.views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+
+    #Generic view url,better for redirect the user and don't give it access to the login page once authenticated.
     path('', LoginView.as_view(
             template_name='login.html',
             redirect_authenticated_user=True
     ),  name='login-page'),
+
+    #did the same thing but can't automatically redirect authenticated user. 
+    # path('', authentication.views.loginPage.as_view(), name='login-page'),
+    
     path('logout', authentication.views.logout_user, name='logout'),
+    path('signup', authentication.views.signup_page.as_view(), name='signup-page'),
     path('home/', blog.views.home_page, name='home-page')
 ]
