@@ -28,5 +28,6 @@ urlpatterns = [
             redirect_authenticated_user=True
     ),  name='login-page'),
     path('logout', authentication.views.logout_user, name='logout'),
+    path('signup', authentication.views.signup_page.as_view(), name='signup-page'),
     path('home/', blog.views.home_page, name='home-page')
 ]
