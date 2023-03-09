@@ -98,6 +98,9 @@ AUTH_PASSWORD_VALIDATORS = [
     {
         'NAME': 'authentication.validators.containLetterValidator',
     },
+    {
+        'NAME': 'authentication.validators.containDigitValidator'
+    }
 ]
 
 

@@ -1,3 +1,4 @@
+import re
 from django.core.exceptions import ValidationError
 
 class containLetterValidator:
@@ -10,3 +11,14 @@ class containLetterValidator:
 
     def get_help_text(self):
         return 'Your password should contain one letter min'
+
+
+class containDigitValidator:
+    def validate(self, password, user=None):
+        if not re.findall('\d', password):
+            raise ValidationError(
+                'Your password should contain at least one number',
+                code='password_no_number'
+            )
+    def get_help_text(self):
+        return 'Your password should contain at least one number'
