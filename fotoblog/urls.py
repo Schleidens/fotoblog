@@ -15,6 +15,8 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
+from django.conf import settings
+from django.conf.urls.static import static
 
 from django.contrib.auth.views import LoginView
 
@@ -37,3 +39,8 @@ urlpatterns = [
     path('signup', authentication.views.signup_page.as_view(), name='signup-page'),
     path('home/', blog.views.home_page, name='home-page')
 ]
+
+
+if settings.DEBUG:
+    urlpatterns += static(
+        settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

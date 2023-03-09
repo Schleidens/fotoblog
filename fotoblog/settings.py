@@ -133,3 +133,6 @@ LOGIN_URL = 'login-page'
 
 #set redirect page for authenticated user
 LOGIN_REDIRECT_URL = 'home-page'
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = BASE_DIR.join_path('media/')
