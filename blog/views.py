@@ -6,13 +6,15 @@ from django.views.generic import View
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from blog.forms import photoForm
+from blog.models import Photo
 
 # Create your views here.
 
 
 @login_required
 def home_page(request):
-    return render(request, 'home.html')
+    photo = Photo.objects.all()
+    return render(request, 'home.html', context={'photos': photo})
 
 #add login restriction using mixin bcz @decorators can't be applied on CBVs 
 #view for upload photo CBVs

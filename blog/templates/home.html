@@ -1,5 +1,17 @@
 {% extends 'base.html' %}
 
 {% block content %}
-welcome  {{  request.user }}
+    <p>
+        welcome  {{  request.user }}
+    </p>
+    <hr />
+    <div>
+        {% for photo in photos %}
+            <img width="100px" height="auto" src="{{ photo.image.url }}" alt="{{ photo.caption }}">
+            <p>
+                {{ photo.caption }}
+            </p>
+        {% endfor %}
+    </div>
+
 {% endblock  %}
