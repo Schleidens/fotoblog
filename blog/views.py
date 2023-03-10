@@ -32,7 +32,7 @@ class photo_upload(LoginRequiredMixin, View):
             photo = form.save(commit=False)
 
             photo.uploader = request.user
-            photo.save
+            photo.save()
 
             return redirect('home-page')
         
