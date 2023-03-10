@@ -37,7 +37,8 @@ urlpatterns = [
     
     path('logout', authentication.views.logout_user, name='logout'),
     path('signup', authentication.views.signup_page.as_view(), name='signup-page'),
-    path('home/', blog.views.home_page, name='home-page')
+    path('home/', blog.views.home_page, name='home-page'),
+    path('add/photo/', blog.views.photo_upload.as_view(), name='add-photo')
 ]
 
 
