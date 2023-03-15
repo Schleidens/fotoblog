@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.contrib.auth import authenticate, login, logout
-from authentication.forms import loginForm, signupForm
+
+from authentication.forms import loginForm, signupForm, UploadProfilePhotoForm
+from authentication.models import User
 
 from django.shortcuts import redirect
 from django.views.generic import  View
@@ -110,3 +112,24 @@ class signup_page(View):
             self.template_form,
             context={'form': form}
             )    
+
+
+#edit photo profile
+class changeProfilePhoto(View):
+    class_form = UploadProfilePhotoForm
+    template = 'profile_photo.html'
+
+    def get(self, request):
+        form = self.class_form(instance=request.user)
+
+        return render(request, self.template, context={'form': form})
+
+
+    def post(self, request):
+        form = self.class_form(request.POST, request.FILES, instance=request.user)
+
+        if form.is_valid():
+            form.save()
+            return redirect('home-page')
+
+        return render(request, self.template, context={'form': form})
