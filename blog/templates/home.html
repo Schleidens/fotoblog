@@ -5,7 +5,15 @@
         welcome  {{  request.user }}
     </p>
     <hr />
-    <div>
+
+    <div style="margin-top: 15px; margin-bottom: 15px;">
+        <a href="{% url 'add-photo' %}">
+            <button>
+                Add a new photo
+            </button>
+        </a>
+    </div>
+    <div style="border: 2px solid black; padding: 5px;">
         {% for photo in photos %}
             <img width="100px" height="auto" src="{{ photo.image.url }}" alt="{{ photo.caption }}">
             <p>
