@@ -7,7 +7,12 @@
         change your profile photo
     </h2>
     <p>
-        <img src="{{request.user.profile_photo.url}}" alt="{{request.user.username}}">
+        {% if request.user.profile_photo %}
+            <img src="{{request.user.profile_photo.url}}" alt="{{request.user.username}}">
+        {% else %}
+            <p> no profile photo uploaded </p>
+        {% endif %}
+
     </p>
 
     <form action="" method="post" enctype="multipart/form-data">
