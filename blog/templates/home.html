@@ -12,6 +12,11 @@
                 Add a new photo
             </button>
         </a>
+        <a href="{% url 'add-blog' %}">
+            <button>
+                Add a new blog
+            </button>
+        </a>
     </div>
     <div style="border: 2px solid black; padding: 5px;">
         {% for photo in photos %}
