@@ -57,7 +57,7 @@ def photo_upload(request):
     return render(request, 'photo_upload.html', context={'form': form})
 ''' 
 
-
+#view for adding a new blog with two forms blogForm and photoForm, CBVs.
 class blog_and_photo_upload(LoginRequiredMixin, View):
     photo_form = photoForm
     blog_form = blogForm
