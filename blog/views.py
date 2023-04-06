@@ -1,12 +1,12 @@
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 
 from django.views.generic import View
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
 from blog.forms import photoForm, blogForm
-from blog.models import Photo
+from blog.models import Photo, Blog
 
 # Create your views here.
 
@@ -90,3 +90,23 @@ class blog_and_photo_upload(LoginRequiredMixin, View):
         }
 
         return render(request, self.template, context=context)
+
+
+#view for single blog blog based on id, CBVs
+
+class blog_view(LoginRequiredMixin, View):
+    blog = Blog
+    template = 'single_blog_view.html'
+
+    def get(self, *args, **kwargs):
+        blog = get_object_or_404(self.blog, id=kwargs['pk'])
+        return render(self.request, self.template, {'blog': blog})
+
+
+'''
+#view for single blog blog based on id, FBVs
+
+def blog_view(request, pk):
+    blog = Blog.objects.get(id=pk)
+    return render(request, 'single_blog_view.html', {'blog': blog})
+'''
