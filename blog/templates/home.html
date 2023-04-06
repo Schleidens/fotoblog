@@ -18,19 +18,33 @@
             </button>
         </a>
     </div>
-    <div style="border: 2px solid black; padding: 5px;">
-        {% for photo in photos %}
-            <img width="100px" height="auto" src="{{ photo.image.url }}" alt="{{ photo.caption }}">
-            <p>
-                {{ photo.caption }}
-            </p>
-            <p>
-                by : {{ photo.uploader }}
-            </p>
-            <p>
-                {{ photo.date_created }}
-            </p>
-        {% endfor %}
+    <div style="display: flex;">
+        <div style="border: 2px solid black; padding: 5px; flex: 50%;">
+            {% for photo in photos %}
+                <img width="100px" height="auto" src="{{ photo.image.url }}" alt="{{ photo.caption }}">
+                <p>
+                    {{ photo.caption }}
+                </p>
+                <p>
+                    by : {{ photo.uploader }}
+                </p>
+                <p>
+                    {{ photo.date_created }}
+                </p>
+            {% endfor %}
+        </div>
+
+        <div style="flex: 50%;">
+            <h2>Blog</h2>
+            {% for blog in blogs %}
+                <div>
+                    <a href="{% url 'single-blog-view' blog.id %}">
+                        <h4>Billet : {{ blog.title }}</h4>
+                        <img src="{{ blog.photo.image.url }}">
+                    </a>
+                </div>
+            {% endfor %}
+        </div>
     </div>
 
 {% endblock  %}
