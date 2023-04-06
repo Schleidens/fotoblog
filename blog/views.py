@@ -14,7 +14,15 @@ from blog.models import Photo, Blog
 @login_required
 def home_page(request):
     photo = Photo.objects.all()
-    return render(request, 'home.html', context={'photos': photo})
+    
+    #get blogs data from model
+    blog = Blog.objects.all()
+
+    context = {
+        'photos' : photo,
+        'blogs' : blog
+    }
+    return render(request, 'home.html', context=context)
 
 #add login restriction using mixin bcz @decorators can't be applied on CBVs 
 #view for upload photo CBVs
