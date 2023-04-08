@@ -19,7 +19,8 @@
         </a>
     </div>
     <div style="display: flex;">
-        <div style="border: 2px solid black; padding: 5px; flex: 50%;">
+        <div style="border: 2px solid black; padding: 5px; margin: 2px; flex: 50%;">
+            <h2>Photo</h2>
             {% for photo in photos %}
                 <img width="100px" height="auto" src="{{ photo.image.url }}" alt="{{ photo.caption }}">
                 <p>
@@ -34,13 +35,13 @@
             {% endfor %}
         </div>
 
-        <div style="flex: 50%;">
+        <div style="flex: 50%; border: 2px solid black; padding: 5px; margin: 2px;">
             <h2>Blog</h2>
             {% for blog in blogs %}
                 <div>
                     <a href="{% url 'single-blog-view' blog.id %}">
                         <h4>Billet : {{ blog.title }}</h4>
-                        <img src="{{ blog.photo.image.url }}">
+                        <img style="width: 200px; height: auto;" src="{{ blog.photo.image.url }}">
                     </a>
                 </div>
             {% endfor %}
