@@ -1,0 +1,20 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h2>
+        Edit this Blog
+    </h2>
+    <form method="post">
+        {{ edit_blog.as_p }}
+        {% csrf_token %}
+        <button type="submit">Save</button>
+    </form>
+
+    <form method="post">
+        {{ delete_blog_form }}
+        {% csrf_token %}
+
+        <button type="submit">Delete</button>
+    </form>
+
+{% endblock content %}

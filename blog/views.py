@@ -5,7 +5,7 @@ from django.views.generic import View
 
 from django.contrib.auth.mixins import LoginRequiredMixin
 
-from blog.forms import photoForm, blogForm
+from blog.forms import photoForm, blogForm, deleteBlogForm
 from blog.models import Photo, Blog
 
 # Create your views here.
@@ -118,3 +118,39 @@ def blog_view(request, pk):
     blog = Blog.objects.get(id=pk)
     return render(request, 'single_blog_view.html', {'blog': blog})
 '''
+
+#edit blog view CBVs
+
+class edit_blog_view(LoginRequiredMixin, View):
+    blog = Blog
+    delete_form = deleteBlogForm
+    template = 'edit_blog.html'
+    def get(self, *args, **kwargs):
+        blog = get_object_or_404(self.blog, id=kwargs['pk'])
+        edit_blog = blogForm(instance=blog)
+
+        delete_blog_form = self.delete_form()
+
+        context = {
+            'edit_blog' : edit_blog,
+            'delete_blog_form': delete_blog_form
+        }
+        return render(self.request, self.template, context=context)
+
+    def post(self, *args, **kwargs):
+        if 'edit_blog' in self.request.POST:
+            blog = get_object_or_404(self.blog, id=kwargs['pk'])
+            edit_form = blogForm(self.request.POST, instance=blog)
+
+            if edit_form.is_valid():
+                edit_form.save()
+                return redirect('single-blog-view', pk=kwargs['pk'])
+            
+        if 'delete_blog' in self.request.POST:
+            blog = get_object_or_404(self.blog, id=kwargs['pk'])
+            delete_blog = self.delete_form(self.request.POST)
+
+            if delete_blog.is_valid():
+                blog.delete()
+                return redirect('home-page')
+

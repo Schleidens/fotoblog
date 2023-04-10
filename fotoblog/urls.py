@@ -43,7 +43,9 @@ urlpatterns = [
     # add photo and blog view CBVs
     path("add/blog", blog.views.blog_and_photo_upload.as_view(), name="add-blog"),
     # url for single blog view
-    path('blog/<int:pk>', blog.views.blog_view.as_view(), name='single-blog-view')
+    path('blog/<int:pk>', blog.views.blog_view.as_view(), name='single-blog-view'),
+    #url for edit and delete blog
+    path('blog/<int:pk>/update',  blog.views.edit_blog_view.as_view(), name='edit-blog')
 ]
 
 
