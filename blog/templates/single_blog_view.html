@@ -2,8 +2,20 @@
 
 
 {% block content %}
-    <h2>{{ blog.title }}</h2>
-    <img src="{{ blog.photo.image.url }}">
-    <p>{{ blog.photo.caption }}</p>
-    <p>{{ blog.content }}</p>
+    <div style="margin-bottom: 150px;">
+        <h2>{{ blog.title }}</h2>
+        <img src="{{ blog.photo.image.url }}">
+        <p>{{ blog.photo.caption }}</p>
+        <p>{{ blog.content }}</p>
+
+        <h3 style="margin-top: 20px;">
+            <a href="{% url 'edit-blog' blog.id %}">
+                <button>
+                    Edit
+                </button>
+            </a>
+        </h3>
+    </div>
+
+
 {% endblock content %}
