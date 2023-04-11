@@ -40,7 +40,7 @@
             {% for blog in blogs %}
                 <div>
                     <a href="{% url 'single-blog-view' blog.id %}">
-                        <h4>Billet : {{ blog.title }}</h4>
+                        <h4>{{ blog.title }}</h4>
                         <img style="width: 200px; height: auto;" src="{{ blog.photo.image.url }}">
                     </a>
                 </div>
