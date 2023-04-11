@@ -1,6 +1,8 @@
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect, get_object_or_404
 
+from django.forms import formset_factory
+
 from django.views.generic import View
 
 from django.contrib.auth.mixins import LoginRequiredMixin
@@ -154,3 +156,30 @@ class edit_blog_view(LoginRequiredMixin, View):
                 blog.delete()
                 return redirect('home-page')
 
+
+#multiple photos upload class CBVs with formset_factory
+class upload_multiple_photos(LoginRequiredMixin, View):
+    photoFormset = formset_factory(photoForm, extra=5)
+    template = 'upload_multiple_photos.html'
+
+    def get(self, request):
+        formset = self.photoFormset()
+        
+        context = {
+            'formset': formset
+        }
+
+        return render(request, self.template, context=context)
+    
+    def post(self, request):
+        formset = self.photoFormset(request.POST, request.FILES)
+
+        if formset.is_valid():
+            for form in formset:
+                if form.cleaned_data:
+                    photo = form.save(commit=False)
+                    photo.uploader = request.user
+                    photo.save()
+
+            return redirect('home-page')
+        
