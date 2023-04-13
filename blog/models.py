@@ -32,5 +32,12 @@ class Blog(models.Model):
     starred =  models.BooleanField(default=False)
     word_count = models.IntegerField(null=True)
 
+    def _get_word_count(self):
+        return len(self.content.split(' '))
+    
+    def save(self, *args, **kwargs):
+        self.word_count = self._get_word_count()
+        super().save(*args, **kwargs)
+
     def __str__(self) -> str:
         return self.title
