@@ -5,7 +5,7 @@ from django.forms import formset_factory
 
 from django.views.generic import View
 
-from django.contrib.auth.mixins import LoginRequiredMixin
+from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
 from blog.forms import photoForm, blogForm, deleteBlogForm
 from blog.models import Photo, Blog
@@ -28,7 +28,9 @@ def home_page(request):
 
 #add login restriction using mixin bcz @decorators can't be applied on CBVs 
 #view for upload photo CBVs
-class photo_upload(LoginRequiredMixin, View):
+class photo_upload(LoginRequiredMixin, PermissionRequiredMixin, View):
+    permission_required = 'blog.add_photo'
+    raise_exception = True
     form_class = photoForm
     template = 'photo_upload.html'
 
