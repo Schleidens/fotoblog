@@ -1,4 +1,5 @@
 from django import forms
+from django.contrib.auth import get_user_model
 
 from blog.models import Photo, Blog
 
@@ -17,3 +18,10 @@ class blogForm(forms.ModelForm):
 
 class deleteBlogForm(forms.Form):
     delete_blog = forms.BooleanField(widget=forms.HiddenInput, initial=True)
+    
+
+#follow form 
+class followUserForm(forms.Form):
+    class Meta:
+        model = get_user_model()
+        fields = ['follow']
