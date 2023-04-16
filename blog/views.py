@@ -7,7 +7,7 @@ from django.views.generic import View
 
 from django.contrib.auth.mixins import LoginRequiredMixin, PermissionRequiredMixin
 
-from blog.forms import photoForm, blogForm, deleteBlogForm
+from blog.forms import photoForm, blogForm, deleteBlogForm, followUserForm
 from blog.models import Photo, Blog
 
 # Create your views here.
@@ -185,3 +185,16 @@ class upload_multiple_photos(LoginRequiredMixin, View):
 
             return redirect('home-page')
         
+        
+#follow user view CBVs
+class follow_user_view(View):
+    form = followUserForm
+    template = 'follow_user_view.html'
+    
+    def get(self, request):
+        follow_form = self.form()
+        
+        return render(request, self.template, {'follow_form' : follow_form})
+    
+    def post(self, request):
+        pass
