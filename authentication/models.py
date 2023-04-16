@@ -14,6 +14,12 @@ class User(AbstractUser):
 
     profile_photo = models.ImageField()
     role =  models.CharField(max_length=30, choices=ROLE_CHOICES)
+    follow = models.ManyToManyField(
+        'self',
+        limit_choices_to=CREATOR,
+        symmetrical=False,
+        verbose_name='Follow'
+    )
 
     def save(self, *args, **kwargs):
         super().save(*args, **kwargs)
