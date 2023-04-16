@@ -47,7 +47,9 @@ urlpatterns = [
     #url for edit and delete blog
     path('blog/<int:pk>/update',  blog.views.edit_blog_view.as_view(), name='edit-blog'),
     #url for multiple_photo_upload view
-    path('add/multiple-photos', blog.views.upload_multiple_photos.as_view(), name='upload-multiple-photos')
+    path('add/multiple-photos', blog.views.upload_multiple_photos.as_view(), name='upload-multiple-photos'),
+    #url for follow_user_view
+    path('follow', blog.views.follow_user_view.as_view(), name='follow')
 ]
 
 
