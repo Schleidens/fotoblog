@@ -16,7 +16,7 @@ class User(AbstractUser):
     role =  models.CharField(max_length=30, choices=ROLE_CHOICES)
     follow = models.ManyToManyField(
         'self',
-        limit_choices_to=CREATOR,
+        limit_choices_to={'role': CREATOR},
         symmetrical=False,
         verbose_name='Follow'
     )

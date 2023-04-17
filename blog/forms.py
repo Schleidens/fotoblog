@@ -21,7 +21,7 @@ class deleteBlogForm(forms.Form):
     
 
 #follow form 
-class followUserForm(forms.Form):
+class followUserForm(forms.ModelForm):
     class Meta:
         model = get_user_model()
         fields = ['follow']
