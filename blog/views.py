@@ -192,9 +192,14 @@ class follow_user_view(View):
     template = 'follow_user_view.html'
     
     def get(self, request):
-        follow_form = self.form()
+        follow_form = self.form(instance=request.user)
         
         return render(request, self.template, {'follow_form' : follow_form})
     
     def post(self, request):
-        pass
+        follow_form = self.form(request.POST, instance=request.user)
+        
+        if follow_form.is_valid():
+            follow_form.save()
+            
+            return redirect('follow')
