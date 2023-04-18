@@ -5,6 +5,8 @@
     <form method="post">
         {{ follow_form.as_p }}
         {% csrf_token %}
+
+        <button type="submit">Follow</button>
     </form>
 
 {% endblock  %}
