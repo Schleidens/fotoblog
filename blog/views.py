@@ -91,6 +91,7 @@ class blog_and_photo_upload(LoginRequiredMixin, View):
             photo.save()
 
             blog = blog_form.save(commit=False)
+            blog.photo = photo
             blog.author = request.user
             blog.save()
 
