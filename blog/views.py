@@ -92,8 +92,8 @@ class blog_and_photo_upload(LoginRequiredMixin, View):
 
             blog = blog_form.save(commit=False)
             blog.photo = photo
-            blog.author = request.user
             blog.save()
+            blog.contributors.add(request.user, through_defaults={'contribution': 'Author'})
 
             return redirect('home-page')
 
