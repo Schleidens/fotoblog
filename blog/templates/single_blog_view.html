@@ -15,6 +15,12 @@
                 </button>
             </a>
         </h3>
+        <form method="post">
+            {{ delete_form }}
+            {% csrf_token %}
+    
+            <button type="submit">Delete</button>
+        </form>
     </div>
 
 

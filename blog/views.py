@@ -110,10 +110,26 @@ class blog_and_photo_upload(LoginRequiredMixin, View):
 class blog_view(LoginRequiredMixin, View):
     blog = Blog
     template = 'single_blog_view.html'
+    
+    delete_form = deleteBlogForm
 
     def get(self, *args, **kwargs):
         blog = get_object_or_404(self.blog, id=kwargs['pk'])
-        return render(self.request, self.template, {'blog': blog})
+        delete_form = self.delete_form
+        
+        context = {
+            'blog': blog,
+            'delete_form': delete_form
+        }
+        return render(self.request, self.template, context=context)
+    
+    def post(self, *args, **kwargs):
+        blog = get_object_or_404(self.blog, id=kwargs['pk'])
+        delete_blog = self.delete_form(self.request.POST)
+        
+        if delete_blog.is_valid():
+            blog.delete()
+            return redirect('home-page')
 
 
 '''
